@@ -1,0 +1,21 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      client-id: spring-kafka-example
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      max-poll-records: 1
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      enable-auto-commit: true
+      auto-offset-reset: latest
+      group-id: spring-kafka-example
+      properties:
+        spring.json.trusted.packages: '*'
+    retry:
+      topic:
+        enabled: false
